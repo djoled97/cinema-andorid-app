@@ -1,44 +1,25 @@
 package com.example.cinema;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cinema.API.API;
 import com.example.cinema.API.RetrofitApi;
 import com.example.cinema.models.User;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String BASE_URL = "http://10.0.2.2:8080";
@@ -59,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fieldName = (EditText) findViewById(R.id.fieldName);
         fieldLastname = (EditText) findViewById(R.id.fieldLastname);
         fieldEmail = (EditText) findViewById(R.id.fieldEmail);
-        fieldUsername = (EditText) findViewById(R.id.fieldUsername);
-        fieldPassword = (EditText) findViewById(R.id.fieldPassword);
+        fieldUsername = (EditText) findViewById(R.id.fieldLoginUsername);
+        fieldPassword = (EditText) findViewById(R.id.fieldLoginPassword);
         fieldConfirmPassword= (EditText) findViewById(R.id.fieldConfirmPassword);
         alreadyRegisteredLogin=(TextView) findViewById(R.id.alreadyRegisteredLogin);
         button = (Button) findViewById(R.id.button);

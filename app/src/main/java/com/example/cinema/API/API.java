@@ -5,6 +5,8 @@ import com.example.cinema.models.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -16,6 +18,6 @@ public  interface API {
 
 
 
-@POST("/login")
-Call<LoginUser> login(@Body LoginUser loginUser);
+@GET("/welcome")
+Call<Void> login(@Header ("Authorization") String authHeader);
 }
