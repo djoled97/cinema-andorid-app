@@ -1,27 +1,28 @@
-package com.example.cinema;
+package com.example.cinema.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.cinema.API.RetrofitApi;
-import com.example.cinema.models.LoginUser;
-import com.example.cinema.models.User;
+import com.example.cinema.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
         EditText fieldUsername;
         EditText fieldPassword;
         Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +30,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         fieldUsername=(EditText) findViewById(R.id.fieldLoginUsername);
         fieldPassword=(EditText) findViewById(R.id.fieldLoginPassword);
         login=(Button) findViewById(R.id.loginButton);
+
         login.setOnClickListener(this);
     }
 
 
     private void login(){
+        Intent intent=new Intent(this, MovieActivity.class);
         String username=fieldUsername.getText().toString().trim();
         String password=fieldPassword.getText().toString().trim();
 //            String username="djoled";
@@ -48,7 +51,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if(response.isSuccessful()){
+                    response.headers().get("Set-Cookie");
+
                     Toast.makeText(getApplicationContext(), "User logged", Toast.LENGTH_SHORT).show();
+                   startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(), "Incorrect credentials", Toast.LENGTH_SHORT).show();
                 }

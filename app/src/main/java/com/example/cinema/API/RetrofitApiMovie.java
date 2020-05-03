@@ -1,34 +1,29 @@
 package com.example.cinema.API;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitApi {
+public class RetrofitApiMovie {
 
-private static RetrofitApi instance=null;
+private static RetrofitApiMovie instance=null;
 
-private static final String BASE_URL_USER="http://10.0.2.2:8080";
+private static final String BASE_URL="https://api.themoviedb.org";
 
 private API api;
 
-public static RetrofitApi getInstance(){
+public static RetrofitApiMovie getInstance(){
     if(instance==null){
-        instance=new RetrofitApi();
+        instance=new RetrofitApiMovie();
     }
     return  instance;
 
 }
-    private RetrofitApi(){
-        buildRetrofitUser(BASE_URL_USER);
+    private RetrofitApiMovie(){
+        buildRetrofitMovie(BASE_URL);
     }
 
 
-    private void buildRetrofitUser(String url) {
+    private void buildRetrofitMovie(String url) {
 //        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
 //        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();

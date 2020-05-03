@@ -1,4 +1,4 @@
-package com.example.cinema;
+package com.example.cinema.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cinema.API.RetrofitApi;
+import com.example.cinema.R;
 import com.example.cinema.models.User;
 
 import java.util.regex.Matcher;
