@@ -34,7 +34,7 @@ public static RetrofitApi getInstance(){
 //        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 //
 //        client =    okHttpBuilder.build();
-
+//        OkHttpClient okHttpClient = new OkHttpClient().a
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
 

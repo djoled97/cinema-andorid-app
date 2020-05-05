@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.example.cinema.API.RetrofitApi;
 import com.example.cinema.R;
 import com.example.cinema.models.User;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText fieldConfirmPassword;
     TextView  alreadyRegisteredLogin;
     Button button;
-
+    okhttp3.Response rawResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,19 +102,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User result = response.body();
-                if (response.body() != null) {
-                    Toast.makeText(getApplicationContext(), "User registered", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "All fields are required", Toast.LENGTH_SHORT).show();
+
+                    if( response.raw().code()==406){
+                        Toast.makeText(getApplicationContext(), "Username taken", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else if(response.raw().code()==510 ){
+                        Toast.makeText(getApplicationContext(), "Email already used", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                else {
+                    Toast.makeText(getApplicationContext(), "User registered", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
-                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_SHORT).show();
-                call.cancel();
+                Toast.makeText(getApplicationContext(), "User with that email/usernamse already exisists", Toast.LENGTH_SHORT).show();
+                t.getMessage();
+               call.cancel();
             }
         });
 
