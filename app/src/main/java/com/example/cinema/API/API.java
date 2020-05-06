@@ -23,7 +23,7 @@ public interface API {
 
 
     @GET("/welcome")
-    Call<Void> login(@Header("Authorization") String authHeader);
+    Call<User> login(@Header("Authorization") String authHeader);
 
 
     @GET("3/movie/now_playing")
@@ -44,6 +44,10 @@ public interface API {
             @Query("api_key") String api_key
 
     );
+
+    @GET("/api/loggedUser")
+    Call<User> loggedUser(@Body User user);
+
 
 }
 

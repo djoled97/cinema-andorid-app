@@ -21,13 +21,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MovieActivity extends AppCompatActivity {
-//    private final String API_KEY = "1a5c0986a122b075e3d752960ecb464f";
+    //    private final String API_KEY = "1a5c0986a122b075e3d752960ecb464f";
 //    private final String LANGUAGE = "en-Us";
 //    private final int PAGE = 1;
     ProgressBar progressBar;
@@ -37,24 +38,26 @@ public class MovieActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     BottomNavigationView bottomnav;
     ScrollView scrollView;
-
+    String name,lastname,email;
+   static int number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
-
-        frameLayout=findViewById(R.id.fragmentContainerMovie);
-        linear = (LinearLayout) findViewById(R.id.linear);
-        bottomnav = findViewById(R.id.bottom_navigation);
-//        scrollView=findViewById(R.id.ScrolviewMovie);
-
-        bottomnav.setOnNavigationItemSelectedListener(navlistener);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerMovie,new HomeFragment()).commit();
-
+        Random random=new Random();
+         number=random.nextInt(4);
+        init();
 
     }
 
+    public void init() {
+        frameLayout = findViewById(R.id.fragmentContainerMovie);
+        linear = (LinearLayout) findViewById(R.id.linear);
+        bottomnav = findViewById(R.id.bottom_navigation);
+        bottomnav.setOnNavigationItemSelectedListener(navlistener);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerMovie, new HomeFragment()).commit();
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -63,7 +66,6 @@ public class MovieActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = item -> {
@@ -75,14 +77,14 @@ public class MovieActivity extends AppCompatActivity {
             case R.id.nav_cart:
                 selectedFrag = new CartFragment();
                 break;
-            case  R.id.nav_user:
-                selectedFrag=new UserFragment();
+            case R.id.nav_user:
+                selectedFrag = new UserFragment();
                 break;
 
         }
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerMovie,selectedFrag).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerMovie, selectedFrag).commit();
 
-        return  true;
+        return true;
     };
 
 

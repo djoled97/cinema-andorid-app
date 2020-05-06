@@ -54,7 +54,7 @@ public class DetailsActivity extends AppCompatActivity {
         castField = findViewById(R.id.castDetails);
         ratingField=findViewById(R.id.ratingDetails);
         poster=findViewById(R.id.posterDetails);
-
+       
     }
 
     private void listDetails() {
