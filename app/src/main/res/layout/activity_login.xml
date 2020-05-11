@@ -43,6 +43,12 @@
             android:gravity="center"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remember me" />
+
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"

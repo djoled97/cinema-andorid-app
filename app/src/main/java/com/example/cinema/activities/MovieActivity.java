@@ -31,21 +31,17 @@ public class MovieActivity extends AppCompatActivity {
     //    private final String API_KEY = "1a5c0986a122b075e3d752960ecb464f";
 //    private final String LANGUAGE = "en-Us";
 //    private final int PAGE = 1;
-    ProgressBar progressBar;
-    TextView movieView;
-    ImageView poster;
+
     LinearLayout linear;
     FrameLayout frameLayout;
     BottomNavigationView bottomnav;
-    ScrollView scrollView;
     String name,lastname,email;
    static int number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
-        Random random=new Random();
-         number=random.nextInt(4);
+
         init();
 
     }
@@ -56,9 +52,13 @@ public class MovieActivity extends AppCompatActivity {
         bottomnav = findViewById(R.id.bottom_navigation);
         bottomnav.setOnNavigationItemSelectedListener(navlistener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerMovie, new HomeFragment()).commit();
+        Random random=new Random();
+        number=random.nextInt(4);
+
+
 
     }
-
+    // On back press put app to background
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);

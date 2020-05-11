@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.DetailsActivity">
@@ -98,7 +99,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
+                    android:onClick="onClick"
                     android:text="11.00" />
 
                 <TextView
@@ -106,7 +110,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
+                    android:onClick="onClick"
                     android:text="16.00" />
 
                 <TextView
@@ -114,7 +121,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
+                    android:onClick="onClick"
                     android:text="18.00" />
 
                 <TextView
@@ -122,7 +132,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center"
+                    android:onClick="onClick"
                     android:text="21.30" />
             </LinearLayout>
 
@@ -132,7 +145,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/firstPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -140,7 +153,7 @@
                     android:text="4$" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/seconPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -148,7 +161,7 @@
                     android:text="5$" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/thirdPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -156,7 +169,7 @@
                     android:text="8$" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/fourthPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

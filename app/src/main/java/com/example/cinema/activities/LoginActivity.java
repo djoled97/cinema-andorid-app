@@ -3,11 +3,13 @@ package com.example.cinema.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,25 +26,58 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         EditText fieldUsername;
         EditText fieldPassword;
         Button login;
-
+        CheckBox rememberMe;
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor editor;
+        boolean savedLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        getSharedPreferences();
+        init();
+    }
+
+    private void init(){
         fieldUsername=(EditText) findViewById(R.id.fieldLoginUsername);
         fieldPassword=(EditText) findViewById(R.id.fieldLoginPassword);
         login=(Button) findViewById(R.id.loginButton);
-
+        rememberMe=findViewById(R.id.rememberMe);
         login.setOnClickListener(this);
+        sharedPreferences=getSharedPreferences("LoginPrefs",0);
+        editor=sharedPreferences.edit();
+
+        savedLogin=sharedPreferences.getBoolean("saveLogin",false);
+        //if preferences exist setting their values to existing ones
+        if (savedLogin) {
+            fieldUsername.setText(sharedPreferences.getString("username", ""));
+            fieldPassword.setText(sharedPreferences.getString("password", ""));
+            rememberMe.setChecked(true);
+        }
+//         username=sharedPreferences.getString("username","No email stored");
+//         password=sharedPreferences.getString("password","");
+
     }
 
+//    private void getSharedPreferences() {
+//        SharedPreferences sp=getSharedPreferences("LoginPrefs",0);
+//        if(sp.contains("username")){
+//            String u=sp.getString("username","no username");
+//            fieldUsername.setText(u);
+//            if(sp.contains("password")){
+//                String p=sp.getString("password","no password");
+//                fieldPassword.setText(p);
+//            }
+//        }
+//    }
 
     private void login(){
         Intent intent=new Intent(this, MovieActivity.class);
+
         String username=fieldUsername.getText().toString().trim();
-        String password=fieldPassword.getText().toString().trim();
-//            String username="djoled";
-//            String password="djoled";
+         String password=fieldPassword.getText().toString().trim();
+            rememberMe(username,password);
+
         String credentials=username + ":" + password;
         String authHeader="Basic " + Base64.encodeToString(credentials.getBytes(),Base64.NO_WRAP);
 
@@ -58,10 +93,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                        User user = response.body();
                        Toast.makeText(getApplicationContext(), "User logged", Toast.LENGTH_SHORT).show();
 
-                       intent.putExtra("name", user.getName());
-                       intent.putExtra("lastname", user.getLastName());
-                       intent.putExtra("email", user.getEmail());
-
+                       editor.putString("name", user.getName());
+                       editor.putString("lastname", user.getLastName());
+                       editor.putString("email", user.getEmail());
+                        editor.apply();
                        startActivity(intent);
                    }
                 }else{
@@ -77,6 +112,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
 
     }
+// Puting values in prefreneces
+    private void rememberMe(String u,String p){
+
+        if (rememberMe.isChecked()) {
+            editor.putBoolean("saveLogin", true);
+            editor.putString("username", u);
+            editor.putString("password", p);
+            editor.apply();
+        } else {
+            editor.clear();
+            editor.apply();
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
             switch (v.getId()){
@@ -84,6 +134,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 case R.id.loginButton:
                     login();
                     break;
+
+
+
             }
     }
 }
