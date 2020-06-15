@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getData() {
-        Intent intent = new Intent(getActivity(), DetailsActivity.class);
+//        Intent intent = new Intent(getActivity(), DetailsActivity.class);
 
         Call<MovieResults> movies = RetrofitApiMovie.getInstance().getApi().listOfMovies(API_KEY, LANGUAGE, PAGE);
 
@@ -100,8 +100,17 @@ public class HomeFragment extends Fragment {
                     post.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            intent.putExtra("id",movie.getId());
-                            startActivity(intent);
+                            DetailsFragment frag=new DetailsFragment();
+                            Bundle bundle=new Bundle();
+                            bundle.putInt("id",movie.getId());
+                            frag.setArguments(bundle);
+//                            intent.putExtra("id",movie.getId());
+//                            startActivity(intent);
+
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragmentContainerMovie, frag, "DetailsFragment")
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                     });
                 }

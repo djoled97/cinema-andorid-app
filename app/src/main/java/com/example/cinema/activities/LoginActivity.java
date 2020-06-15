@@ -89,10 +89,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if(response.isSuccessful()){
                    if(response.body()!=null) {
-                       response.headers().get("Set-Cookie");
+//                       response.headers().get("Set-Cookie");
                        User user = response.body();
                        Toast.makeText(getApplicationContext(), "User logged", Toast.LENGTH_SHORT).show();
-
+                       editor.putString("username",user.getUsername());
                        editor.putString("name", user.getName());
                        editor.putString("lastname", user.getLastName());
                        editor.putString("email", user.getEmail());

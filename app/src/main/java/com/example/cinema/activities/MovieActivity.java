@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.cinema.API.RetrofitApiMovie;
 import com.example.cinema.R;
+import com.example.cinema.db.Database;
 import com.example.cinema.models.MovieResults;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
@@ -36,6 +37,7 @@ public class MovieActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     BottomNavigationView bottomnav;
     String name,lastname,email;
+    Database myDB;
    static int number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class MovieActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = item -> {
